@@ -22,6 +22,7 @@ export const Route = createFileRoute("/journal")({
 
 function Journal() {
   const [lead, ...rest] = journal;
+  if (!lead) return null;
 
   return (
     <div className="mx-auto max-w-[86rem] px-5 pb-20 pt-12 md:px-10 md:pt-16">

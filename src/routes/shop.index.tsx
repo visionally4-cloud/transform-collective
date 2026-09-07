@@ -6,7 +6,7 @@ type Search = { filter?: Category | "All" };
 
 export const Route = createFileRoute("/shop/")({
   validateSearch: (search: Record<string, unknown>): Search => {
-    const raw = String(search.filter ?? "All");
+    const raw = String(search['filter'] ?? "All");
     const valid = ["All", ...categories] as string[];
     return { filter: (valid.includes(raw) ? raw : "All") as Category | "All" };
   },
