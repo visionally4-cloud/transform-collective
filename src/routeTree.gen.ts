@@ -15,6 +15,7 @@ import { Route as HowItTransformsRouteImport } from './routes/how-it-transforms'
 import { Route as JournalRouteImport } from './routes/journal'
 import { Route as OurStoryRouteImport } from './routes/our-story'
 import { Route as ShopIndexRouteImport } from './routes/shop.index'
+import { Route as ShopSlugRouteImport } from './routes/shop.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +47,11 @@ const ShopIndexRoute = ShopIndexRouteImport.update({
   path: '/shop/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ShopSlugRoute = ShopSlugRouteImport.update({
+  id: '/shop/$slug',
+  path: '/shop/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/how-it-transforms': typeof HowItTransformsRoute
   '/journal': typeof JournalRoute
   '/our-story': typeof OurStoryRoute
+  '/shop/$slug': typeof ShopSlugRoute
   '/shop/': typeof ShopIndexRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/how-it-transforms': typeof HowItTransformsRoute
   '/journal': typeof JournalRoute
   '/our-story': typeof OurStoryRoute
+  '/shop/$slug': typeof ShopSlugRoute
   '/shop': typeof ShopIndexRoute
 }
 export interface FileRoutesById {
@@ -70,6 +78,7 @@ export interface FileRoutesById {
   '/how-it-transforms': typeof HowItTransformsRoute
   '/journal': typeof JournalRoute
   '/our-story': typeof OurStoryRoute
+  '/shop/$slug': typeof ShopSlugRoute
   '/shop/': typeof ShopIndexRoute
 }
 export interface FileRouteTypes {
@@ -80,6 +89,7 @@ export interface FileRouteTypes {
     | '/how-it-transforms'
     | '/journal'
     | '/our-story'
+    | '/shop/$slug'
     | '/shop/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -88,6 +98,7 @@ export interface FileRouteTypes {
     | '/how-it-transforms'
     | '/journal'
     | '/our-story'
+    | '/shop/$slug'
     | '/shop'
   id:
     | '__root__'
@@ -96,6 +107,7 @@ export interface FileRouteTypes {
     | '/how-it-transforms'
     | '/journal'
     | '/our-story'
+    | '/shop/$slug'
     | '/shop/'
   fileRoutesById: FileRoutesById
 }
@@ -105,6 +117,7 @@ export interface RootRouteChildren {
   HowItTransformsRoute: typeof HowItTransformsRoute
   JournalRoute: typeof JournalRoute
   OurStoryRoute: typeof OurStoryRoute
+  ShopSlugRoute: typeof ShopSlugRoute
   ShopIndexRoute: typeof ShopIndexRoute
 }
 
@@ -152,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/shop/$slug': {
+      id: '/shop/$slug'
+      path: '/shop/$slug'
+      fullPath: '/shop/$slug'
+      preLoaderRoute: typeof ShopSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -161,6 +181,7 @@ const rootRouteChildren: RootRouteChildren = {
   HowItTransformsRoute: HowItTransformsRoute,
   JournalRoute: JournalRoute,
   OurStoryRoute: OurStoryRoute,
+  ShopSlugRoute: ShopSlugRoute,
   ShopIndexRoute: ShopIndexRoute,
 }
 export const routeTree = rootRouteImport
